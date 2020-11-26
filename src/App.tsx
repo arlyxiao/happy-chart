@@ -1,27 +1,39 @@
 
 import * as React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import {useSelector, useDispatch} from 'react-redux';
+
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-interface Props {
-   name:
-    string
+import Error from './pages/error';
+
+
+const APP = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'pages',
+      value: {
+        name: 'your-preferable name'
+      }
+    });
+  }, []);
+
+
+  return (
+    <Switch>
+      <Route component={Error} />
+    </Switch>
+  )
 }
 
-class App extends React.Component<Props> {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-        <button type="button" class="btn btn-primary">
-          This is a bootstrap button
-        </button>
-      </>
-    );
-  }
-}
 
-export default App;
+export default APP;
